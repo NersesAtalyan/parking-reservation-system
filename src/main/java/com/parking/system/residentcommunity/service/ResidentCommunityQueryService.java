@@ -1,5 +1,8 @@
 package com.parking.system.residentcommunity.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import com.parking.system.common.exception.NotFoundException;
 import com.parking.system.community.data.Community;
 import com.parking.system.resident.data.Resident;
@@ -8,9 +11,6 @@ import com.parking.system.residentcommunity.data.ResidentCommunityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

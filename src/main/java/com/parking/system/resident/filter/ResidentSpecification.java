@@ -1,18 +1,18 @@
 package com.parking.system.resident.filter;
 
-import com.parking.system.resident.data.Resident;
-import com.parking.system.resident.dto.ResidentFilterRequest;
-import com.parking.system.residentcommunity.data.ResidentCommunity;
-import jakarta.persistence.criteria.*;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.lang.NonNull;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import com.parking.system.resident.data.Resident;
+import com.parking.system.resident.dto.ResidentFilterRequest;
+import com.parking.system.residentcommunity.data.ResidentCommunity;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.Predicate;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ResidentSpecification {

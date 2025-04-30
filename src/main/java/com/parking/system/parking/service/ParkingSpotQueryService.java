@@ -1,16 +1,17 @@
 package com.parking.system.parking.service;
 
+import java.time.Instant;
+import java.util.List;
+
 import com.parking.system.common.exception.NotFoundException;
 import com.parking.system.community.data.Community;
 import com.parking.system.parking.data.ParkingSpot;
 import com.parking.system.parking.data.ParkingSpotRepository;
 import com.parking.system.parking.presets.SpotStatus;
+import com.parking.system.residentcommunity.data.ResidentCommunity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.Instant;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -36,5 +37,10 @@ public class ParkingSpotQueryService {
 
     public List<ParkingSpot> findReservedBefore(Instant time) {
         return parkingSpotRepository.findByStatusAndReservedAtBefore(SpotStatus.RESERVED, time);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ParkingSpot> findAllReservedByResidentCommunity(ResidentCommunity rc) {
+        return parkingSpotRepository.findAllByReservedBy(rc);
     }
 }

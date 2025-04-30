@@ -1,8 +1,8 @@
 package com.parking.system.parkinghistory.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-
 import java.time.Instant;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "Response representing a parking history record")
 public record ParkingHistoryResponse(

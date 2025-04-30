@@ -1,8 +1,13 @@
 package com.parking.system.residentcommunity.service;
 
+import java.util.List;
+
 import com.parking.system.common.exception.BusinessException;
 import com.parking.system.community.data.Community;
 import com.parking.system.community.service.CommunityQueryService;
+import com.parking.system.parking.data.ParkingSpot;
+import com.parking.system.parking.service.BookingService;
+import com.parking.system.parking.service.ParkingSpotQueryService;
 import com.parking.system.resident.data.Resident;
 import com.parking.system.resident.service.ResidentQueryService;
 import com.parking.system.residentcommunity.data.ResidentCommunity;
@@ -13,8 +18,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class ResidentCommunityService {
@@ -23,6 +26,8 @@ public class ResidentCommunityService {
     private final CommunityQueryService communityQueryService;
     private final ResidentCommunityQueryService residentCommunityQueryService;
     private final ResidentCommunityMapper residentCommunityMapper;
+    private final BookingService bookingService;
+    private final ParkingSpotQueryService parkingSpotQueryService;
 
     @Transactional
     public void joinCommunity(Long residentId, Long communityId) {
@@ -59,6 +64,10 @@ public class ResidentCommunityService {
         if (!membership.isActive()) {
             throw new BusinessException(ResidentCommunityErrorCodes.ALREADY_LEFT);
         }
+
+        // 🔥 Force release any active reservation
+        List<ParkingSpot> spots = parkingSpotQueryService.findAllReservedByResidentCommunity(membership);
+        spots.forEach(bookingService::forceRelease);
 
         membership.setActive(false);
         residentCommunityQueryService.save(membership);

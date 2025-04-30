@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.parking.system.community.data.Community;
 import com.parking.system.parking.presets.SpotStatus;
+import com.parking.system.residentcommunity.data.ResidentCommunity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,4 +15,7 @@ public interface ParkingSpotRepository extends JpaRepository<ParkingSpot, Long> 
     List<ParkingSpot> findByCommunity(Community community);
 
     List<ParkingSpot> findByStatusAndReservedAtBefore(SpotStatus spotStatus, Instant time);
+
+    List<ParkingSpot> findAllByReservedBy(ResidentCommunity residentCommunity);
+
 }

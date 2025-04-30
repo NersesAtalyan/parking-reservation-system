@@ -1,5 +1,7 @@
 package com.parking.system.parking.service;
 
+import java.util.List;
+
 import com.parking.system.community.data.Community;
 import com.parking.system.community.service.CommunityQueryService;
 import com.parking.system.parking.data.ParkingSpot;
@@ -11,9 +13,6 @@ import com.parking.system.parking.presets.SpotStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.Instant;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

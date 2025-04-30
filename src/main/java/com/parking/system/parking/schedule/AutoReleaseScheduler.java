@@ -1,5 +1,9 @@
 package com.parking.system.parking.schedule;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.util.List;
+
 import com.parking.system.common.properties.ParkingProperties;
 import com.parking.system.notification.NotifierService;
 import com.parking.system.parking.data.ParkingSpot;
@@ -12,10 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.Duration;
-import java.time.Instant;
-import java.util.List;
 
 @Slf4j
 @Component

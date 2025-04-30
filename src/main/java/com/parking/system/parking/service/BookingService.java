@@ -4,6 +4,7 @@ import java.time.Instant;
 
 import com.parking.system.common.exception.BusinessException;
 import com.parking.system.community.data.Community;
+import com.parking.system.notification.NotifierService;
 import com.parking.system.parking.data.ParkingSpot;
 import com.parking.system.parking.presets.ParkingErrorCodes;
 import com.parking.system.parking.presets.SpotStatus;
@@ -22,6 +23,7 @@ public class BookingService {
     private final ParkingSpotQueryService parkingSpotQueryService;
     private final ResidentCommunityQueryService residentCommunityQueryService;
     private final ParkingHistoryManagerService parkingHistoryManagerService;
+    private final NotifierService notifierService;
 
     @Transactional
     public void bookSpot(Long spotId, Long residentId) {
@@ -99,5 +101,21 @@ public class BookingService {
         }
 
         return membership;
+    }
+
+    @Transactional
+    public void forceRelease(ParkingSpot spot) {
+        parkingHistoryManagerService.recordRelease(spot);
+
+        if (spot.getReservedBy() != null && spot.getReservedBy().getResident() != null) {
+            notifierService.notifyAutoRelease(spot.getReservedBy().getResident(), spot.getSpotNumber(), spot.getCommunity().getName());
+        }
+
+        spot.setStatus(SpotStatus.AVAILABLE);
+        spot.setReservedAt(null);
+        spot.setReservedBy(null);
+        spot.setParkedAt(null);
+
+        parkingSpotQueryService.save(spot);
     }
 }

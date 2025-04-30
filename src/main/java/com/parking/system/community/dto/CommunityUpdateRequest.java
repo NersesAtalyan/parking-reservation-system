@@ -1,8 +1,7 @@
 package com.parking.system.community.dto;
 
-import jakarta.validation.constraints.NotBlank;
-
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
 
 @Schema(description = "Request to update an existing community")
 public record CommunityUpdateRequest(

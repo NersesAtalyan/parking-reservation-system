@@ -3,8 +3,8 @@ package com.parking.system.resident;
 import java.util.List;
 
 import com.parking.system.resident.dto.ResidentCreateRequest;
-import com.parking.system.resident.dto.ResidentResponse;
 import com.parking.system.resident.dto.ResidentFilterRequest;
+import com.parking.system.resident.dto.ResidentResponse;
 import com.parking.system.resident.dto.ResidentUpdateRequest;
 import com.parking.system.resident.service.ResidentService;
 import io.swagger.v3.oas.annotations.Operation;
