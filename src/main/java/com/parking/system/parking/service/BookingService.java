@@ -86,7 +86,18 @@ public class BookingService {
     }
 
     private ResidentCommunity findResidentCommunityOrThrow(Long residentId, Community community) {
-        return residentCommunityQueryService.findByResidentIdAndCommunityId(residentId, community.getId())
+        ResidentCommunity membership = residentCommunityQueryService
+                .findByResidentIdAndCommunityId(residentId, community.getId())
                 .orElseThrow(() -> new BusinessException(ResidentCommunityErrorCodes.MEMBERSHIP_NOT_FOUND));
+
+        if (!membership.isActive()) {
+            throw new BusinessException(ResidentCommunityErrorCodes.INACTIVE_MEMBERSHIP);
+        }
+
+        if (!membership.getResident().isActive()) {
+            throw new BusinessException(ResidentCommunityErrorCodes.INACTIVE_RESIDENT);
+        }
+
+        return membership;
     }
 }
