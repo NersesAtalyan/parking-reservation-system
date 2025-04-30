@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name:  parking-reservation-system-postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: parking_user
+      POSTGRES_PASSWORD: parking_pass
+      POSTGRES_DB: parking_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+
