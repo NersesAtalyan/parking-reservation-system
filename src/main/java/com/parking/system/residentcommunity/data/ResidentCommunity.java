@@ -41,9 +41,6 @@ public class ResidentCommunity {
     @Column(name = "joined_at", nullable = false, updatable = false)
     private Instant joinedAt;
 
-//    @Column(name = "role_in_community")
-//    private String role;
-
     @Column(nullable = false)
     private boolean active = true;
 }
